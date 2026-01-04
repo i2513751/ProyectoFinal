@@ -2,8 +2,9 @@ from capaDatos.dProducto import DProducto
 
 class LProducto:
     def __init__(self, rol):
-        if rol != "ADMIN":
-            raise PermissionError("No tiene permisos para acceder a esta sección")
+        if rol not in ["ADMIN", "VENDEDOR", "TECNICO"]:
+            raise PermissionError("No autorizado")
+
 
         self.__dProducto = DProducto()
 
