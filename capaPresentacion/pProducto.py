@@ -3,27 +3,17 @@ from capaLogica.lProducto import LProducto
 
 class PProducto:
     def __init__(self):
-        self.__lProducto = LProducto()
-        self.construirInterfaz()
+        rol = st.session_state.get("rol")
 
-    def construirInterfaz(self):
-        self.mostrarProducto()
-
-
-    def mostrarProducto(self):
-        st.subheader("Listado de productos")
-        productos = self.__lProducto.listarProductos()
-        st.dataframe(productos)
-
-    def mostrar(self):
-
-        if st.session_state.get("rol") != "ADMIN":
+        if rol != "ADMIN":
             st.error("Acceso restringido")
             st.stop()
 
-        lp = LProducto(st.session_state["rol"])
+        # Crear LProducto SOLO una vez y bien
+        self.__lProducto = LProducto(rol)
 
-        st.title("CRUD Productos")
+    def mostrar(self):
+        st.title("CRUD Productos (ADMIN)")
 
         # CREAR
         with st.form("crear_producto"):
@@ -33,7 +23,7 @@ class PProducto:
             guardar = st.form_submit_button("Guardar")
 
             if guardar:
-                res = lp.crearProducto({
+                res = self.__lProducto.crearProducto({
                     "nombre": nombre,
                     "precio": precio,
                     "stock": stock
@@ -48,7 +38,12 @@ class PProducto:
         st.divider()
 
         # LISTAR / EDITAR / ELIMINAR
-        productos = lp.listarProductos()
+        st.subheader("Listado de productos")
+        productos = self.__lProducto.listarProductos()
+
+        if not productos:
+            st.info("No hay productos registrados")
+            return
 
         for p in productos:
             with st.expander(p["nombre"]):
@@ -65,20 +60,9 @@ class PProducto:
                 col1, col2 = st.columns(2)
 
                 if col1.button("Actualizar", key=f"u{p['id']}"):
-                    res = lp.editarProducto(
+                    res = self.__lProducto.editarProducto(
                         p["id"],
                         {"nombre": nombre, "precio": precio, "stock": stock}
                     )
                     if res is True:
                         st.success("Actualizado")
-                        st.rerun()
-                    else:
-                        st.error(res)
-
-                if col2.button("Eliminar", key=f"d{p['id']}"):
-                    res = lp.eliminarProducto(p["id"])
-                    if res is True:
-                        st.warning("Eliminado")
-                        st.rerun()
-                    else:
-                        st.error(res)
