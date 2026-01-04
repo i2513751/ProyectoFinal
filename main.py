@@ -33,4 +33,5 @@ if st.session_state["rol"] == "VENDEDOR":
 
 # 🛠 ADMIN (opcional, info extra)
 if st.session_state["rol"] == "ADMIN":
+    PProducto().mostrar()
     st.info("Panel de administración")
