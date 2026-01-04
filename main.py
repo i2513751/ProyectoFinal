@@ -1,7 +1,6 @@
 import streamlit as st
-import streamlit as st
 
-# 🔐 Inicialización OBLIGATORIA de sesión
+# 🔐 Inicialización de sesión
 if "login" not in st.session_state:
     st.session_state["login"] = False
 
@@ -15,17 +14,23 @@ from capaPresentacion.pLogin import PLogin
 from capaPresentacion.pProducto import PProducto
 from capaPresentacion.pVenta import PVenta
 
-if "login" not in st.session_state:
-    st.session_state["login"] = False
-
+# 🔐 LOGIN
 if not st.session_state["login"]:
     PLogin().mostrar()
-else:
-    st.write("Bienvenido")
-    objetoPrueba = PProducto()
+    st.stop()
 
+# 🧪 DEBUG (puedes quitarlo luego)
+st.write("ROL ACTUAL:", st.session_state["rol"])
+
+st.title("Sistema de Ventas")
+st.success("Bienvenido")
+
+# 🛒 VENTAS → SOLO VENDEDOR
 if st.session_state["rol"] == "VENDEDOR":
     PVenta().mostrar()
-
-if st.session_state["rol"] == "ADMIN":
     PProducto().mostrar()
+
+
+# 🛠 ADMIN (opcional, info extra)
+if st.session_state["rol"] == "ADMIN":
+    st.info("Panel de administración")
