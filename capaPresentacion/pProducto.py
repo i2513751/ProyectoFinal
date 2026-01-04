@@ -5,7 +5,7 @@ class PProducto:
     def __init__(self):
         rol = st.session_state.get("rol")
 
-        if rol != "ADMIN":
+        if rol not in ["ADMIN", "VENDEDOR", "TECNICO"]:
             st.error("Acceso restringido")
             st.stop()
 
