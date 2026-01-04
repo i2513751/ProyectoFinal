@@ -26,3 +26,6 @@ else:
 
 if st.session_state["rol"] == "VENDEDOR":
     PVenta().mostrar()
+
+if st.session_state["rol"] == "ADMINISTRACIÓN":
+    PProducto().mostrar()
