@@ -1,7 +1,10 @@
 from capaDatos.dProducto import DProducto
 
 class LProducto:
-    def __init__(self):
+    def __init__(self, rol):
+        if rol != "ADMIN":
+            raise PermissionError("No tiene permisos para acceder a esta sección")
+
         self.__dProducto = DProducto()
 
     def listarProductos(self):
