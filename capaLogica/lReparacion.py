@@ -1,0 +1,22 @@
+from capaDatos.dReparacion import DReparacion
+
+class LReparacion:
+    def __init__(self):
+        self.__dReparacion = DReparacion()
+
+    def registrar(self, cliente, equipo, problema, id_tecnico):
+        if not cliente or not equipo or not problema:
+            return False, "Todos los campos son obligatorios"
+
+        self.__dReparacion.registrarReparacion(cliente, equipo, problema, id_tecnico)
+        return True, "Reparación registrada correctamente"
+
+    def listarPorTecnico(self, id_tecnico):
+        return self.__dReparacion.listarReparacionesPorTecnico(id_tecnico)
+
+    def cambiarEstado(self, id_reparacion, estado):
+        if estado not in ["RECIBIDO", "EN_REPARACION", "LISTO"]:
+            return False, "Estado inválido"
+
+        self.__dReparacion.actualizarEstado(id_reparacion, estado)
+        return True, "Estado actualizado"
