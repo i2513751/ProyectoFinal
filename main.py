@@ -28,5 +28,5 @@ else:
 if st.session_state["rol"] == "VENDEDOR":
     PVenta().mostrar()
     
-if st.session_state["rol"] == "VENDEDOR":
+if st.session_state["rol"] == "TECNICO":
     PReparacion().mostrar()
