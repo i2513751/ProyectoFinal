@@ -14,6 +14,7 @@ if "id_usuario" not in st.session_state:
 from capaPresentacion.pLogin import PLogin
 from capaPresentacion.pProducto import PProducto
 from capaPresentacion.pVenta import PVenta
+from capaPresentacion.pReparacion import PReparacion
 
 if "login" not in st.session_state:
     st.session_state["login"] = False
@@ -26,3 +27,6 @@ else:
 
 if st.session_state["rol"] == "VENDEDOR":
     PVenta().mostrar()
+    
+if st.session_state["rol"] == "VENDEDOR":
+    PReparacion().mostrar()
