@@ -13,6 +13,7 @@ if "id_usuario" not in st.session_state:
 from capaPresentacion.pLogin import PLogin
 from capaPresentacion.pProducto import PProducto
 from capaPresentacion.pVenta import PVenta
+from capaPresentacion.pReparacion import PReparacion
 
 # LOGIN
 if not st.session_state["login"]:
@@ -35,3 +36,6 @@ if st.session_state["rol"] == "VENDEDOR":
 if st.session_state["rol"] == "ADMIN":
     PProducto().mostrar()
     st.info("Panel de administración")
+
+if st.session_state["rol"] == "TECNICO":
+    PReparacion().mostrar()
