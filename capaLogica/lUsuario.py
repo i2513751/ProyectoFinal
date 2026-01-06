@@ -5,6 +5,8 @@ class LUsuario:
         self.__dUsuario = DUsuario()
 
     def validarLogin(self, usuario, password):
+        usuario = usuario.strip().lower()
+
         data = self.__dUsuario.obtenerUsuario(usuario)
 
         if not data:
