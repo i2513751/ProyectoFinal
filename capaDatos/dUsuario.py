@@ -11,3 +11,4 @@ class DUsuario:
             return obUsuario.data
         except Exception:
             return f'Error: '
+        
