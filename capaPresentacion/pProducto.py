@@ -7,18 +7,18 @@ class PProducto:
 
         st.subheader("Productos")
 
-        # 👉 LISTAR (todos los roles)
+        # LISTAR (todos los roles)
         productos = LProducto(rol).listarProductos()
         st.dataframe(productos)
 
-        # 👉 SOLO ADMIN VE EL CRUD
+        # SOLO ADMIN VE EL CRUD
         if rol != "ADMIN":
             return
 
         st.divider()
         st.title("Administrar productos")
 
-        # 👉 CREAR
+        # CREAR
         with st.form("crear_producto"):
             nombre = st.text_input("Nombre")
             precio = st.number_input("Precio", min_value=0.0)
@@ -39,7 +39,7 @@ class PProducto:
 
         st.divider()
 
-        # 👉 LISTAR / EDITAR / ELIMINAR
+        # LISTAR / EDITAR / ELIMINAR
         for p in productos:
             with st.expander(p["nombre"]):
                 nombre = st.text_input("Nombre", p["nombre"], key=f"n{p['id']}")
