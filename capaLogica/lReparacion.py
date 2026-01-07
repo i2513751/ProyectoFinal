@@ -20,3 +20,13 @@ class LReparacion:
 
         self.__dReparacion.actualizarEstado(id_reparacion, estado)
         return True, "Estado actualizado"
+    
+    def consultarPorCodigo(self, codigo):
+        codigo = codigo.strip().upper()
+
+        if not codigo:
+            return None
+
+        data = self.__dReparacion.buscarPorCodigo(codigo)
+        return data[0] if data else None
+
