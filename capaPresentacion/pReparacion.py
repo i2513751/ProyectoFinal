@@ -15,13 +15,17 @@ class PReparacion:
         problema = st.text_area("Problema reportado")
 
         if st.button("Registrar reparación"):
-            ok, mensaje = lReparacion.registrar(cliente, equipo, problema, id_tecnico)
+            ok, codigo, mensaje = lReparacion.registrar(
+                cliente, equipo, problema, id_tecnico
+            )
+
             if ok:
                 st.success(mensaje)
-                st.rerun()
+                st.info(f"Código de seguimiento: {codigo}")
+                st.warning("Entregue este código al cliente")
             else:
                 st.error(mensaje)
-
+                
         # Lista de reparaciones
         st.markdown("### Mis reparaciones")
         reparaciones = lReparacion.listarPorTecnico(id_tecnico)
