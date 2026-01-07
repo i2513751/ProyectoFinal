@@ -15,3 +15,7 @@ class DReparacion:
 
     def actualizarEstado(self, id_reparacion, nuevo_estado):
         self.__db.table(self.__tabla).update({"estado": nuevo_estado}).eq("id", id_reparacion).execute()
+
+    def buscarPorCodigo(self, codigo):
+        busCodigo = self.__db.table(self.__tabla).select("equipo, estado, fecha_ingreso").eq("codigo", codigo).execute()
+        return busCodigo.data
