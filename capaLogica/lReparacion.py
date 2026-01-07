@@ -6,11 +6,14 @@ class LReparacion:
 
     def registrar(self, cliente, equipo, problema, id_tecnico):
         if not cliente or not equipo or not problema:
-            return False, "Todos los campos son obligatorios"
+            return False, None, "Todos los campos son obligatorios"
 
-        self.__dReparacion.registrarReparacion(cliente, equipo, problema, id_tecnico)
-        return True, "Reparación registrada correctamente"
+        data = self.__dReparacion.registrarReparacion(cliente, equipo, problema, id_tecnico)
 
+        codigo = data[0]["codigo"] 
+
+        return True, codigo, "Reparación registrada correctamente"
+    
     def listarPorTecnico(self, id_tecnico):
         return self.__dReparacion.listarReparacionesPorTecnico(id_tecnico)
 

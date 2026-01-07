@@ -14,6 +14,7 @@ from capaPresentacion.pLogin import PLogin
 from capaPresentacion.pProducto import PProducto
 from capaPresentacion.pVenta import PVenta
 from capaPresentacion.pReparacion import PReparacion
+from capaPresentacion.pSeguimiento import PSeguimiento
 
 # LOGIN
 if not st.session_state["login"]:
@@ -39,3 +40,4 @@ if st.session_state["rol"] == "ADMIN":
 
 if st.session_state["rol"] == "TECNICO":
     PReparacion().mostrar()
+
